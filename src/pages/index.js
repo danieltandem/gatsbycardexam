@@ -14,18 +14,6 @@ const IndexPage = ({data}) => (
       </ul>
     </nav>
     <div className="contenedor-card">
-      <div>
-      {data.allTecnologiasJson.edges.map(({ node }) => {
-        const image = getImage(node.image);
-        return (
-          <div key={node.id}>
-            <h2>{node.title}</h2>
-            <p>{node.description}</p>
-            <GatsbyImage image={image} alt={node.title} />
-            <a href={node.link}>Leer más</a>
-          </div>
-        );
-      })}
       <Cards
       footphoto={"Hola mamsasita"}
       title={"Hola bebe"}
@@ -41,7 +29,6 @@ const IndexPage = ({data}) => (
       title={"Er kyrian"}
       description={"Chopped"}>
       </Cards>
-    </div>
     </div>
   </Layout>
 )
