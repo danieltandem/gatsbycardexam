@@ -1,122 +1,76 @@
 import * as React from "react"
-import { Link } from "gatsby"
-import { StaticImage } from "gatsby-plugin-image"
-
 import Layout from "../components/layout"
 import Seo from "../components/seo"
-import * as styles from "../components/index.module.css"
+import Cards from "../components/card"
+import { Link,graphql } from "gatsby"
+import { GatsbyImage,getImage } from "gatsby-plugin-image"
 
-const links = [
-  {
-    text: "Tutorial",
-    url: "https://www.gatsbyjs.com/docs/tutorial",
-    description:
-      "A great place to get started if you're new to web development. Designed to guide you through setting up your first Gatsby site.",
-  },
-  {
-    text: "Examples",
-    url: "https://github.com/gatsbyjs/gatsby/tree/master/examples",
-    description:
-      "A collection of websites ranging from very basic to complex/complete that illustrate how to accomplish specific tasks within your Gatsby sites.",
-  },
-  {
-    text: "Plugin Library",
-    url: "https://www.gatsbyjs.com/plugins",
-    description:
-      "Learn how to add functionality and customize your Gatsby site or app with thousands of plugins built by our amazing developer community.",
-  },
-  {
-    text: "Build and Host",
-    url: "https://www.gatsbyjs.com/cloud",
-    description:
-      "Now you’re ready to show the world! Give your Gatsby site superpowers: Build and host on Gatsby Cloud. Get started for free!",
-  },
-]
-
-const samplePageLinks = [
-  {
-    text: "Page 2",
-    url: "page-2",
-    badge: false,
-    description:
-      "A simple example of linking to another page within a Gatsby site",
-  },
-  { text: "TypeScript", url: "using-typescript" },
-  { text: "Server Side Rendering", url: "using-ssr" },
-  { text: "Deferred Static Generation", url: "using-dsg" },
-]
-
-const moreLinks = [
-  { text: "Join us on Discord", url: "https://gatsby.dev/discord" },
-  {
-    text: "Documentation",
-    url: "https://gatsbyjs.com/docs/",
-  },
-  {
-    text: "Starters",
-    url: "https://gatsbyjs.com/starters/",
-  },
-  {
-    text: "Showcase",
-    url: "https://gatsbyjs.com/showcase/",
-  },
-  {
-    text: "Contributing",
-    url: "https://www.gatsbyjs.com/contributing/",
-  },
-  { text: "Issues", url: "https://github.com/gatsbyjs/gatsby/issues" },
-]
-
-const utmParameters = `?utm_source=starter&utm_medium=start-page&utm_campaign=default-starter`
-
-const IndexPage = () => (
+const IndexPage = ({data}) => (
   <Layout>
-    <div className={styles.textCenter}>
-      <StaticImage
-        src="../images/example.png"
-        loading="eager"
-        width={64}
-        quality={95}
-        formats={["auto", "webp", "avif"]}
-        alt=""
-        style={{ marginBottom: `var(--space-3)` }}
-      />
-      <h1>
-        Welcome to <b>Gatsby!</b>
-      </h1>
-      <p className={styles.intro}>
-        <b>Example pages:</b>{" "}
-        {samplePageLinks.map((link, i) => (
-          <React.Fragment key={link.url}>
-            <Link to={link.url}>{link.text}</Link>
-            {i !== samplePageLinks.length - 1 && <> · </>}
-          </React.Fragment>
-        ))}
-        <br />
-        Edit <code>src/pages/index.js</code> to update this page.
-      </p>
+    <nav>
+      <ul>
+        <li><Link to= "/">Inicio"</Link></li>
+        <li><Link to= "/contacto">Contacto</Link></li>
+      </ul>
+    </nav>
+    <div className="contenedor-card">
+      <div>
+      {data.allTecnologiasJson.edges.map(({ node }) => {
+        const image = getImage(node.image);
+        return (
+          <div key={node.id}>
+            <h2>{node.title}</h2>
+            <p>{node.description}</p>
+            <GatsbyImage image={image} alt={node.title} />
+            <a href={node.link}>Leer más</a>
+          </div>
+        );
+      })}
+      <Cards
+      footphoto={"Hola mamsasita"}
+      title={"Hola bebe"}
+      description={"Muy bonito"}>
+      </Cards>
+      <Cards
+      footphoto={"Opaca "}
+      title={"La bim Bam Bum"}
+      description={"No LE MIRES "}>
+      </Cards>
+      <Cards
+      footphoto={"Ky puto"}
+      title={"Er kyrian"}
+      description={"Chopped"}>
+      </Cards>
     </div>
-    <ul className={styles.list}>
-      {links.map(link => (
-        <li key={link.url} className={styles.listItem}>
-          <a
-            className={styles.listItemLink}
-            href={`${link.url}${utmParameters}`}
-          >
-            {link.text} ↗
-          </a>
-          <p className={styles.listItemDescription}>{link.description}</p>
-        </li>
-      ))}
-    </ul>
-    {moreLinks.map((link, i) => (
-      <React.Fragment key={link.url}>
-        <a href={`${link.url}${utmParameters}`}>{link.text}</a>
-        {i !== moreLinks.length - 1 && <> · </>}
-      </React.Fragment>
-    ))}
+    </div>
   </Layout>
 )
+
+export const query = graphql`
+query MyQuery {
+  allTecnologiasJson {
+    edges {
+      node {
+        id
+        link
+        title
+        image {
+          childImageSharp {
+            gatsbyImageData(
+              placeholder: DOMINANT_COLOR
+              formats: WEBP
+              width: 300
+              aspectRatio: 1.77
+            )
+          }
+        }
+        description
+      }
+    }
+  }
+}
+`
+
 
 /**
  * Head export to define metadata for the page
@@ -126,3 +80,4 @@ const IndexPage = () => (
 export const Head = () => <Seo title="Home" />
 
 export default IndexPage
+
