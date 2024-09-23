@@ -1,0 +1,14 @@
+.cardexamen{
+    background-color: pink;
+    max-width: 300px;
+    border: solid 8px blue;
+}
+.contenedor-card{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    justify-content: center;
+}
+.cardexamen img{
+    width: 100%;
+}
