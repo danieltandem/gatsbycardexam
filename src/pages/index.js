@@ -46,31 +46,6 @@ const IndexPage = ({data}) => (
   </Layout>
 )
 
-export const query = graphql`
-query MyQuery {
-  allTecnologiasJson {
-    edges {
-      node {
-        id
-        link
-        title
-        image {
-          childImageSharp {
-            gatsbyImageData(
-              placeholder: DOMINANT_COLOR
-              formats: WEBP
-              width: 300
-              aspectRatio: 1.77
-            )
-          }
-        }
-        description
-      }
-    }
-  }
-}
-`
-
 
 /**
  * Head export to define metadata for the page
