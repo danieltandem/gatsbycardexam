@@ -10,7 +10,7 @@
       "id": 2,
       "title": "Explora Gatsby",
       "description": "Gatsby es un framework basado en React que permite crear sitios web rápidos y modernos.",
-      "image": "../images/gatsby.jpg",
+      "image": "../images/gatsby.png",
       "link": "https://www.gatsbyjs.com/"
     },
     {

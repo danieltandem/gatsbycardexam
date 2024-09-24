@@ -6,6 +6,9 @@
     margin: 16px;
     background-color: #E5F6FF;
 }
+.cardexamen:hover{
+    transform: scale(1.25) ;
+}
 .card-container{
     display: flex;
     flex-wrap: wrap;
@@ -49,4 +52,5 @@
     font-family: Roboto;
     font-size: 16px;
     font-weight: 400;
+    text-decoration: none;
 }
