@@ -1,45 +1,69 @@
 import * as React from "react"
+import { Link } from "gatsby"
+import Card from "../components/card"
+import { getImage } from 'gatsby-plugin-image';
+
 import Layout from "../components/layout"
 import Seo from "../components/seo"
-import Cards from "../components/card"
-import { Link,graphql } from "gatsby"
-import { GatsbyImage,getImage } from "gatsby-plugin-image"
+import { graphql } from "gatsby"
+
+
 
 const IndexPage = ({data}) => (
   <Layout>
-    <nav>
-      <ul>
-        <li><Link to= "/">Inicio"</Link></li>
-        <li><Link to= "/contacto">Contacto</Link></li>
-      </ul>
-    </nav>
-    <div className="contenedor-card">
-      <Cards
-      footphoto={"Hola mamsasita"}
-      title={"Hola bebe"}
-      description={"Muy bonito"}>
-      </Cards>
-      <Cards
-      footphoto={"Opaca "}
-      title={"La bim Bam Bum"}
-      description={"No LE MIRES "}>
-      </Cards>
-      <Cards
-      footphoto={"Ky puto"}
-      title={"Er kyrian"}
-      description={"Chopped"}>
-      </Cards>
+   <nav>
+    <ul>
+      <li><Link to="/contacto">Contacto</Link></li>
+    </ul>
+   </nav>
+  <h1>Inicio</h1>
+ 
+  
+  <div className="card-container">
+      {data.allTecnologiasJson.edges.map(({ node }) => {
+        const image = getImage(node.image);
+        return (
+          
+            <Card 
+            titulo={node.title}
+            descripcion={node.description} 
+            imagen={image} 
+            piefoto={node.title} 
+            link= {node.link}
+            ></Card>
+          
+        );
+      })}
     </div>
+
   </Layout>
 )
 
+export const query = graphql`
+ query {
+  allTecnologiasJson {
+    edges {
+      node {
+        id
+        link
+        title
+        image {
+          childImageSharp {
+            gatsbyImageData(
+              placeholder: DOMINANT_COLOR
+              formats: WEBP
+              width: 300
+              aspectRatio: 1.77
+            )
+          }
+        }
+        description
+      }
+    }
+  }
+}
+`;
 
-/**
- * Head export to define metadata for the page
- *
- * See: https://www.gatsbyjs.com/docs/reference/built-in-components/gatsby-head/
- */
 export const Head = () => <Seo title="Home" />
 
 export default IndexPage
-

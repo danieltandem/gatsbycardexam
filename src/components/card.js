@@ -1,17 +1,24 @@
-import React from "react"
-import "./card.css"
-const Cards = ({image ="https://picsum.photos/200/300",footphoto,title,description}) => {
-    return(
-        <>
-        <div className="container cardexamen">
-            <figure>
-                <img src={image}></img>
-                <figcaption>{footphoto}</figcaption>
-            </figure>
-            <h2>{title}</h2>
-            <p>{description}</p>
-        </div>
-        </>
-    )
+import React from "react";
+import './card.css'
+import { GatsbyImage } from 'gatsby-plugin-image';
+import { Link } from "gatsby";
+
+const Card=({titulo,imagen, piefoto, descripcion,link})=>{
+return(
+  <>
+  <div className="cardexamen">
+  <h2 className="titulo">{titulo}</h2>
+    <figure>
+      <a href={link}>
+      <GatsbyImage className="imagen" image={imagen} alt={piefoto} />
+      </a>
+    </figure>
+    <p className="textotarjeta">{descripcion}</p>
+    <button className="botonlink">
+    <Link to={link} ><p className="textoboton">MAS INFO</p></Link>
+    </button>
+  </div>
+  </>
+)
 }
-export default Cards
+export default Card

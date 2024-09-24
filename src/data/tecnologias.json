@@ -20,12 +20,4 @@
       "image": "../images/figma.jpg",
       "link": "https://www.figma.com/"
     }
-,
-    {
-      "id": 4,
-      "title": "Consulta a tus datos con GRAPHQL",
-      "description": "GraphQL es un lenguaje de consulta y manipulación de datos para APIs, y un entorno de ejecución para realizar consultas con datos existentes",
-      "image": "../images/graphql.jpg",
-      "link": "https://graphql.org/"
-    }
   ]
